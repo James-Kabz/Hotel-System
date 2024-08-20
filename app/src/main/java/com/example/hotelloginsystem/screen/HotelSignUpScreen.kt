@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -31,8 +32,16 @@ fun HotelLoginScreen(navController: NavController) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
+    var passwordVisible by remember { mutableStateOf(false) }
+    var showPasswordToggle by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) } //checkbox state
     var successMessage by remember { mutableStateOf<String?>(null) }
+
+    val visualTransformation = if (passwordVisible) {
+        VisualTransformation.None
+    } else {
+        PasswordVisualTransformation()
+    }
 
     Box(
         modifier = Modifier
@@ -101,10 +110,25 @@ fun HotelLoginScreen(navController: NavController) {
                     value = password,
                     onValueChange = { password = it },
                     label = { Text("Password") },
-                    visualTransformation = PasswordVisualTransformation(),
+                    visualTransformation = visualTransformation,
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Checkbox for toggling password visibility
+                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = showPasswordToggle,
+                        onCheckedChange = { isChecked ->
+                            showPasswordToggle = isChecked
+                            passwordVisible = isChecked
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = "Show Password",color = Color.Black)
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -117,20 +141,25 @@ fun HotelLoginScreen(navController: NavController) {
 
                 Button(
                     onClick = {
-                        signUp(
-                            email,
-                            password,
-                            { user ->
-                                successMessage = "Verification email sent to ${user?.email}"
-                            },
-                            { error ->
-                                errorMessage = error
-                            }
-                        )
+                        // Validate email and password
+                        if (email.isNotEmpty() && password.isNotEmpty()) {
+                            signUp(
+                                email,
+                                password,
+                                { user ->
+                                    successMessage = "Verification email sent to ${user?.email}"
+                                },
+                                { error ->
+                                    errorMessage = error
+                                }
+                            )
+                        } else {
+                            errorMessage = "Please enter both email and password"
+                        }
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Sign Up")
+                    Text("Register")
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
