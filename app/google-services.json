@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1019702385453",
+    "project_id": "colaboration-app",
+    "storage_bucket": "colaboration-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019702385453:android:6bf99a2336adeec57f11a4",
+        "android_client_info": {
+          "package_name": "com.example.hotelloginsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTkKW-b_INKT2jXmNlUTk6x0xtbaHhDzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
