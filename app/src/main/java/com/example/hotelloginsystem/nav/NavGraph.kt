@@ -12,6 +12,7 @@ import com.example.hotelloginsystem.screen.HotelLoginScreen
 import com.example.hotelloginsystem.screen.LoginScreen
 import com.example.hotelloginsystem.screen.MainScreen
 import com.example.hotelloginsystem.screen.ProfileScreen
+import com.example.hotelloginsystem.screen.ForgotPasswordScreen
 import com.example.hotelloginsystem.utils.SharedViewModel
 
 @Composable
@@ -23,6 +24,12 @@ fun NavGraph(
         navController = navController,
         startDestination = Screens.LoginScreen.route
     ) {
+//        reset password
+        composable(
+          route = Screens.ForgotPasswordScreen.route
+        ){
+            ForgotPasswordScreen(navController = navController)
+        }
 //        sign up screen
         composable(
             route = Screens.HotelSignUpScreen.route

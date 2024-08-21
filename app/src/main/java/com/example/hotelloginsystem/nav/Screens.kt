@@ -2,6 +2,7 @@ package com.example.hotelloginsystem.nav
 
 
 sealed class Screens(val route: String) {
+    data object ForgotPasswordScreen:Screens(route = "reset_password")
     data object HotelSignUpScreen:Screens(route = "sign_up")
     data object LoginScreen:Screens(route = "login_screen")
     data object ProfileScreen:Screens(route = "profile_screen")
